@@ -7,9 +7,7 @@ argo = importlib.import_module('.Argo', 'Classes.Argo')
 def handler(event, context):
 	try:		
 		result = argo.Argo(event).findLatLng()
-		return {
-			"statusCode": 200,
-			"body": {
+		response_body = {
 				"results": result,
 				"error": {
 					"has_error": False,
@@ -17,14 +15,16 @@ def handler(event, context):
 					"exceptionMessage": ""
 				}
 			}
+
+		return {
+			"statusCode": 200,
+			"body": json.dumps(response_body, ensure_ascii = False)
 		}
 
 	except Exception as e:
 		exception_status_code = getExceptionStatusCode(e)
 		exception_message = createExceptionMessage(e)
-		return {
-			"statusCode": exception_status_code,
-			"body": {
+		response_body = {
 				"results": {
 					"foundMatch": False,
 					"method": "",
@@ -32,6 +32,10 @@ def handler(event, context):
 				},
 				"error": exception_message
 			}
+
+		return {
+			"statusCode": exception_status_code,
+			"body": json.dumps(response_body, ensure_ascii = False)
 		}
 
 
@@ -56,4 +60,4 @@ def createExceptionMessage(e):
 		"exceptionMessage": exception_content
 	}
 	
-	return json.dumps(exception_message)
+	return exception_message

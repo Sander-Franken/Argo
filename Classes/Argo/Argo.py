@@ -47,12 +47,13 @@ class Argo:
 			"result": self.result
 		}
 
-		return json.dumps(self.response_body, ensure_ascii = False)
+		return self.response_body
 
 
 	# Fetches the data from the event
 	def fetchRequestBody(self):
-		self.request_body = json.loads(self.event)["queryStringParameters"]
+		self.event = json.loads(self.event)
+		self.request_body = self.event["body"]
 
 
 	# Validates the input, the body of the request. If it's not usable an error is raised.
