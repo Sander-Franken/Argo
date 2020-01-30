@@ -164,7 +164,7 @@ class Argo:
 
 	# The regex used in this method will capture any decimal number (only with "." as decimal separator) that falls within a valid
 	# range to be a latitude or longitude coordinate. This means that it will relatively often capture other numbers that may be
-	# in an address (ex. in "7.5 KM from Highway 3" it will capture the "7.5"). Therefor additional checks are required to make sure
+	# in an address (ex. in "7.5 KM from Highway 3" it will capture the "7.5"). Therefor additional checks are implemented to make sure
 	# if or which of the captured numbers are lat/lngs.
 	#
 	# Regex used: (?:([+-]?([1-8]?[0-9])(\.[0-9]+)|90(\.0+))|([+-]?((180(\.0+))|((1[0-7][0-9])|([0-9]{1,2}))\.[0-9]+)))
