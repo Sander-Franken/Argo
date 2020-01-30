@@ -3,28 +3,20 @@
 
 ## What is this service used for: 
 
-Argo is used to detect coordinates in strings. It will return coordinates found in both Degrees Minutes Seconds (DMS) and Decimal notation.
-
+Argo is used to detect coordinates in strings. It will return coordinates found in both Degrees Minutes Seconds (DMS) and Decimal notation. It is built to be deployed on Amazon Lambda, triggered through the API Gateway.
 
 #### Author:
-[Sander Franken]()
+[Sander Franken](https://github.com/Sander-Franken)
 
-## Connecting to the service:
+#### How to set up this service:
 
-#### Endpoint:
-```
-https://connect.globalinter.net/argo
-```
+- On AWS Lambda:
+	If you're deploying this service on AWS Lambda all you need is the lambda_function.zip file.
+	Create a new Lambda function with runtime Python 3.7, set the handler function to be lambda_function.handler and you're good to go! Further in this README you may find the required request format.
 
-#### Uris & Methods:
+- Otherwise:
+	You will likely not be using the lambda_function.py file and thus will have to restructure a bit. The main difference is in the instantiation of the Argo class in the "handler" method in the lambda_function.py file and the "fetchRequestBody" method in the Argo class. They refer to the "event" variable that is passed to the handler method by AWS Lambda. This is a JSON, where the "body" is the address that is supplied with the request. When not using AWS Lambda you must find your own way of getting the address into the self.address variable in the Argo class.
 
-| Uri Path | Methods allowed |
-| --- | --- |
-| /detect | `HEAD` `POST` |
-
-
-#### Security: 
-An X-Api-Key is used for this API.
 
 
 #### Request:
